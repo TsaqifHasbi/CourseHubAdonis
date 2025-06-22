@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Admin Dashboard
+    </title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">
+        Admin Dashboard
+      </h1>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Total Courses
+              </h5>
+              <p class="card-text">
+                {{ totalCourses }}
+              </p>
+              <a href="/admin/courses" class="btn btn-primary">Manage Courses</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Total Instructors
+              </h5>
+              <p class="card-text">
+                {{ totalInstructors }}
+              </p>
+              <a href="/admin/instructors" class="btn btn-primary">Manage Instructors</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Total Registrations
+              </h5>
+              <p class="card-text">
+                {{ totalRegistrations }}
+              </p>
+              <a href="/admin/registrations" class="btn btn-primary">Manage Registrations</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/js/bootstrap.bundle.min.js">
+      
+    </script>
+  </body>
+</html>

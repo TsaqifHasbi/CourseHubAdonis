@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {{ course.nama_kursus }}
+    </title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        {{ course.nama_kursus }}
+      </h1>
+      <p>
+        <strong>Durasi:</strong>{{ course.durasi }}
+      </p>
+      <p>
+        <strong>Biaya:</strong>{{ course.biaya }}
+      </p>
+      <p>
+        <strong>Instruktur:</strong>{{ course.instructor.nama }}
+      </p>
+
+      <h2>
+        Materi
+      </h2>
+      <ul>
+        @each(material in course.materi)
+          <li>
+            <strong>{{ material.judul }}</strong>: {{ material.deskripsi }}
+                    <a href="/uploads/{{ material.file }}" target="_blank">Download</a>
+          </li>
+        @endeach
+      </ul>
+
+      <h2>
+        Peserta Terdaftar
+      </h2>
+      <ul>
+        @each(registration in course.registrations)
+          <li>
+            {{ registration.peserta.nama }} - Status: {{ registration.status }}
+          </li>
+        @endeach
+      </ul>
+
+      <a href="/admin/courses" class="btn btn-primary">Kembali ke Daftar Kursus</a>
+    </div>
+  </body>
+</html>

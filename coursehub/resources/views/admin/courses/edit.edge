@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Edit Course
+    </title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>
+        Edit Course
+      </h2>
+      <form action="/admin/courses/{{ course.id }}" method="POST">
+        <input type="hidden" name="_method" value="PUT" />
+        <div class="mb-3">
+          <label for="nama_kursus" class="form-label">Course Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama_kursus"
+            name="nama_kursus"
+            value="{{ course.nama_kursus }}"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="durasi" class="form-label">Duration</label>
+          <input type="text" class="form-control" id="durasi" name="durasi" value="{{ course.durasi }}" required />
+        </div>
+        <div class="mb-3">
+          <label for="instruktur_id" class="form-label">Instructor</label>
+          <select class="form-select" id="instruktur_id" name="instruktur_id" required>
+            @foreach (instructors as instructor)
+              <option value="{{ instructor.id }}" {{ instructor.id === course.instruktur_id ? 'selected' : '' }}>
+                {{ instructor.nama }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="biaya" class="form-label">Cost</label>
+          <input type="number" class="form-control" id="biaya" name="biaya" value="{{ course.biaya }}" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Update Course</button>
+        <a href="/admin/courses" class="btn btn-secondary">Cancel</a>
+      </form>
+    </div>
+    <script src="/assets/js/bootstrap.bundle.min.js">
+      
+    </script>
+  </body>
+</html>

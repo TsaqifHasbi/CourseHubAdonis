@@ -1,0 +1,17 @@
+<div class="course-card">
+  <div class="card">
+    <img src="{{ course.image }}" alt="{{ course.nama_kursus }}" class="card-img-top" />
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ course.nama_kursus }}
+      </h5>
+      <p class="card-text">
+        Durasi: {{ course.durasi }} | Biaya: {{ course.biaya }}
+      </p>
+      <p class="card-text">
+        Instruktur: {{ course.instructor.nama }}
+      </p>
+      <a href="/courses/{{ course.id }}" class="btn btn-primary">Lihat Detail</a>
+    </div>
+  </div>
+</div>

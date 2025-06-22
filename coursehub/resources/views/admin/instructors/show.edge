@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Instructor Details
+    </title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>
+        Instructor Details
+      </h1>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ instructor.nama }}
+          </h5>
+          <p class="card-text">
+            Email: {{ instructor.email }}
+          </p>
+          <a href="{{ route('admin.instructors.edit', instructor.id) }}" class="btn btn-primary">Edit</a>
+          <form action="{{ route('admin.instructors.destroy', instructor.id) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <a href="{{ route('admin.instructors.index') }}" class="btn btn-secondary">Back to Instructors</a>
+          </div>
+        </div>
+      </div>
+      <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}">
+        
+      </script>
+    </body>
+  </html>

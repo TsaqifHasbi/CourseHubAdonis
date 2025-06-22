@@ -1,0 +1,108 @@
+@component('components/layout/admin')
+  @slot('content')
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold">
+        Create New Course
+      </h2>
+      <p class="text-gray-500 dark:text-gray-400 mt-1">
+        Add a new course to the system
+      </p>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+      <form action="{{ route('admin.courses.store') }}" method="POST" class="p-6">
+        {{ csrfField() }}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Course Name -->
+          <div>
+            <label for="namaCourse" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Course Name
+        </label>
+            <input
+              type="text"
+              name="namaCourse"
+              id="namaCourse"
+              class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              required
+            />
+          </div>
+
+          <!-- Duration -->
+          <div>
+            <label for="durasi" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Duration (hours)
+        </label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <input
+                type="number"
+                name="durasi"
+                id="durasi"
+                class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white pr-12 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                placeholder="e.g., 24"
+                min="1"
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <span class="text-gray-500 dark:text-gray-400 sm:text-sm">hours</span>
+              </div>
+            </div>
+              required
+            />
+          </div>
+
+          <!-- Price -->
+          <div>
+            <label for="biaya" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Price (Rp)
+        </label>
+            <input
+              type="number"
+              name="biaya"
+              id="biaya"
+              class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              min="0"
+              step="10000"
+              required
+            />
+          </div>
+
+          <!-- Instructor -->
+          <div>
+            <label for="instructorId" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Instructor
+        </label>
+            <select
+              name="instructorId"
+              id="instructorId"
+              class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              required
+            >
+              <option value="">
+                Select an instructor
+              </option>
+              @each(instructor in instructors)
+                <option value="{{ instructor.id }}">
+                  {{ instructor.nama }}
+                </option>
+              @endeach
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <a
+            href="{{ route('admin.courses.index') }}"
+            class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Cancel
+      </a>
+          <button
+            type="submit"
+            class="ml-3 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Create Course
+      </button>
+        </div>
+      </form>
+    </div>
+  @endslot
+@endcomponent

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Instructors
+    </title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">
+        Instructors
+      </h1>
+      <a href="{{ route('admin.instructors.create') }}" class="btn btn-primary mb-3">Add New Instructor</a>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              ID
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (instructors as instructor)
+            <tr>
+              <td>
+                {{ instructor.id }}
+              </td>
+              <td>
+                {{ instructor.nama }}
+              </td>
+              <td>
+                {{ instructor.email }}
+              </td>
+              <td>
+                <a href="{{ route('admin.instructors.edit', instructor.id) }}" class="btn btn-warning">Edit</a>
+                <form
+                  action="{{ route('admin.instructors.destroy', instructor.id) }}"
+                  method="POST"
+                  style="display:inline;"
+                >
+                  @csrf
+                  @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      <script src="/assets/js/bootstrap.bundle.min.js">
+        
+      </script>
+    </body>
+  </html>

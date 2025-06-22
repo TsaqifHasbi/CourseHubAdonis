@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Registration Details
+    </title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>
+        Registration Details
+      </h1>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Course: {{ registration.course.nama_kursus }}
+          </h5>
+          <p class="card-text">
+            Participant: {{ registration.peserta.nama }}
+          </p>
+          <p class="card-text">
+            Status: {{ registration.status }}
+          </p>
+          <p class="card-text">
+            Registered On: {{ registration.created_at }}
+          </p>
+        </div>
+      </div>
+      <a href="{{ route('admin.registrations.index') }}" class="btn btn-primary mt-3">Back to Registrations</a>
+    </div>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}">
+      
+    </script>
+  </body>
+</html>

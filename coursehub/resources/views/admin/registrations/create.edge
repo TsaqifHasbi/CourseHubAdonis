@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Create Registration
+    </title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>
+        Create Registration
+      </h2>
+      <form action="{{ route('registrations.store') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+          <label for="course_id" class="form-label">Course</label>
+          <select name="course_id" id="course_id" class="form-select" required>
+            <option value="">
+              Select Course
+            </option>
+            @foreach($courses as $course)
+              <option value="{{ $course.id }}">
+                {{ $course.nama_kursus }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="student_id" class="form-label">Student</label>
+          <select name="student_id" id="student_id" class="form-select" required>
+            <option value="">
+              Select Student
+            </option>
+            @foreach($students as $student)
+              <option value="{{ $student.id }}">
+                {{ $student.nama }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select name="status" id="status" class="form-select" required>
+            <option value="pending">
+              Pending
+            </option>
+            <option value="confirmed">
+              Confirmed
+            </option>
+            <option value="canceled">
+              Canceled
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Registration</button>
+      </form>
+      <a href="{{ route('registrations.index') }}" class="btn btn-secondary mt-3">Back to Registrations</a>
+    </div>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}">
+      
+    </script>
+  </body>
+</html>

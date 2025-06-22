@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      All Courses
+    </title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">
+        All Courses
+      </h1>
+      <div class="row">
+        @each(course in courses)
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">
+                  {{ course.nama_kursus }}
+                </h5>
+                <p class="card-text">
+                  Duration: {{ course.durasi }} hours
+                </p>
+                <p class="card-text">
+                  Instructor: {{ course.instructor.nama }}
+                </p>
+                <p class="card-text">
+                  Cost: ${{ course.biaya }}
+                </p>
+                <a href="/courses/{{ course.id }}" class="btn btn-primary">View Details</a>
+              </div>
+            </div>
+          </div>
+        @endeach
+      </div>
+      <div class="text-center">
+        <a href="/courses/create" class="btn btn-success">Add New Course</a>
+      </div>
+    </div>
+    <script src="/assets/js/bootstrap.bundle.min.js">
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Registrations
+    </title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">
+        Registrations
+      </h1>
+      <a href="{{ route('admin.registrations.create') }}" class="btn btn-primary mb-3">Add Registration</a>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              ID
+            </th>
+            <th>
+              Course
+            </th>
+            <th>
+              Participant
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (registrations as registration)
+            <tr>
+              <td>
+                {{ registration.id }}
+              </td>
+              <td>
+                {{ registration.course.name }}
+              </td>
+              <td>
+                {{ registration.participant.name }}
+              </td>
+              <td>
+                {{ registration.status }}
+              </td>
+              <td>
+                <a href="{{ route('admin.registrations.edit', registration.id) }}" class="btn btn-warning">Edit</a>
+                <form
+                  action="{{ route('admin.registrations.destroy', registration.id) }}"
+                  method="POST"
+                  style="display:inline;"
+                >
+                  @csrf
+                  @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      <script src="/assets/js/bootstrap.bundle.min.js">
+        
+      </script>
+    </body>
+  </html>

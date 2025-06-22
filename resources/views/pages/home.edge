@@ -1,0 +1,167 @@
+@component('components/layout/app')
+  @slot('content')
+    <!-- Hero section -->
+    <div class="relative bg-gradient-to-r from-blue-800 to-indigo-900 overflow-hidden">
+      <div class="pt-10 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden">
+        <div class="mx-auto max-w-7xl lg:px-8">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+            <div
+              class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
+              <div class="lg:py-24">
+                <span class="inline-block bg-indigo-500 text-white px-4 py-1.5 text-sm font-medium rounded-full">Better way to learn</span>
+                <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                  <span class="block">Expand Your</span>
+                  <span class="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-teal-200 to-indigo-300">Knowledge Today</span>
+                </h1>
+                <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                  CourseHub offers high-quality courses taught by experienced industry professionals. 
+                  Take your skills to the next level with our comprehensive learning materials and hands-on projects.
+                </p>
+                <div class="mt-10 sm:mt-12 flex flex-col sm:flex-row sm:gap-4">
+                  <a
+                    href="{{ route('courses.index') }}"
+                    class="py-3 px-6 rounded-md shadow bg-indigo-500 text-white font-medium text-center hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 transition-all duration-300"
+                  >
+                    Browse All Courses
+                  </a>
+                  @if(!auth.isAuthenticated)
+                  <a
+                    href="{{ route('register') }}"
+                    class="mt-3 sm:mt-0 py-3 px-6 rounded-md border border-indigo-400 text-white font-medium text-center hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900 transition-all duration-300">
+                    Register Now
+                  </a>
+                  @endif
+                </div>
+              </div>
+            </div>
+            <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
+              <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
+                <!-- Hero image -->
+                <img
+                  class="w-full rounded-lg shadow-2xl lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
+                  src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2831&auto=format&fit=crop&ixlib=rb-4.0.3"
+                  alt="Person coding on a laptop"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Courses Section -->
+    <div class="bg-white py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Featured Courses</h2>
+          <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+            Explore our most popular courses and start your learning journey today.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          @each(course in featuredCourses)
+            <div class="flex flex-col overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
+              <div class="flex-shrink-0">
+                <img class="h-48 w-full object-cover" 
+                  src="{{ course.id % 2 === 0 ? 
+                    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80' : 
+                    'https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80' }}"
+                  alt="{{ course.nama_kursus }}"
+                />
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-6">
+                <div class="flex-1">
+                  <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-xs font-semibold rounded-full">
+                    {{ course.durasi }} Hours
+                  </span>
+                  <a href="{{ route('courses.show', { id: course.id }) }}" class="mt-2 block">
+                    <p class="text-xl font-semibold text-gray-900">{{ course.nama_kursus }}</p>
+                    <p class="mt-3 text-base text-gray-500">
+                      Taught by {{ course.instructor.nama }}
+                    </p>
+                  </a>
+                </div>
+                <div class="mt-6 flex items-center justify-between">
+                  <p class="text-medium font-bold text-indigo-600">Rp.{{ course.biaya.toLocaleString('id-ID') }}</p>
+                  <a 
+                    href="{{ route('courses.show', { id: course.id }) }}"
+                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    View Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          @else
+            <div class="text-center col-span-full py-12">
+              <p class="text-gray-500">No courses available at this time.</p>
+            </div>
+          @end
+        </div>
+        
+        <div class="mt-10 text-center">
+          <a 
+            href="{{ route('courses.index') }}" 
+            class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            View All Courses
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="bg-gray-50 py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Why Choose CourseHub</h2>
+          <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+            Our platform offers a unique learning experience that sets us apart.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-lg font-medium text-gray-900">Expert Instructors</h3>
+            <p class="mt-2 text-base text-gray-500">
+              Learn from industry professionals with years of experience in their respective fields.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-lg font-medium text-gray-900">Quality Content</h3>
+            <p class="mt-2 text-base text-gray-500">
+              All courses are carefully crafted to provide the most valuable and up-to-date information.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <div class="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="mt-6 text-lg font-medium text-gray-900">Fast Learning</h3>
+            <p class="mt-2 text-base text-gray-500">
+              Our structured curriculum helps you learn efficiently and apply skills immediately.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endslot
+@end

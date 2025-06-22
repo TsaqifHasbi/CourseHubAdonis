@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {{ course.nama_kursus }}
+    </title>
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        {{ course.nama_kursus }}
+      </h1>
+      <p>
+        <strong>Durasi:</strong>{{ course.durasi }}
+      </p>
+      <p>
+        <strong>Biaya:</strong>{{ course.biaya }}
+      </p>
+      <p>
+        <strong>Instruktur:</strong>{{ course.instructor.nama }}
+      </p>
+
+      <h2>
+        Materi
+      </h2>
+      <ul>
+        @each(material in course.materi)
+          <li>
+            <h3>
+              {{ material.judul }}
+            </h3>
+            <p>
+              {{ material.deskripsi }}
+            </p>
+            <a href="{{ route('materials.download', material.id) }}">Download</a>
+          </li>
+        @endeach
+      </ul>
+
+      <h2>
+        Pendaftaran
+      </h2>
+      <p>
+        Jumlah peserta terdaftar: {{ course.registrations.length }}
+      </p>
+      <ul>
+        @each(registration in course.registrations)
+          <li>
+            {{ registration.peserta.nama }} - Status: {{ registration.status }}
+          </li>
+        @endeach
+      </ul>
+
+      <a href="{{ route('registrations.create', course.id) }}" class="btn btn-primary">Daftar Kursus</a>
+      <a href="{{ route('courses.index') }}" class="btn btn-secondary">Kembali ke Semua Kursus</a>
+    </div>
+  </body>
+</html>

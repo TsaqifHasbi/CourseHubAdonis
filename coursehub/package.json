@@ -1,0 +1,35 @@
+{
+  "name": "coursehub",
+  "version": "1.0.0",
+  "description": "A web application for managing courses, instructors, and registrations.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "tsc",
+    "migrate": "node ace migration:run",
+    "seed": "node ace db:seed"
+  },
+  "dependencies": {
+    "@adonisjs/core": "^6.0.0",
+    "@adonisjs/auth": "^6.0.0",
+    "@adonisjs/lucid": "^6.0.0",
+    "@adonisjs/drive": "^6.0.0",
+    "bcrypt": "^5.0.1",
+    "edge.js": "^2.7.0",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "nodemon": "^2.0.15"
+  },
+  "keywords": [
+    "course",
+    "management",
+    "web",
+    "adonisjs"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
